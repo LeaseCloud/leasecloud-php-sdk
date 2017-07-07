@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
  */
 class MontlyTest extends TestCase
 {
-    public function testCanBeUsedAsString()
+    public function testSetAndGetApiKey()
     {
         Montly::setApiKey('Hello');
         $this->assertEquals('Hello', Montly::getApiKey());
