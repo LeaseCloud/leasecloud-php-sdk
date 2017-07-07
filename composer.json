@@ -1,0 +1,27 @@
+{
+  "name": "montlyab/montly-php-sdk",
+  "description": "Montly PHP SDK",
+  "keywords": [ "montly", "payments", "rest", "api", "sdk" ],
+  "homepage": "https://www.montly.com/",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Montly",
+      "homepage": "https://github.com/MontlyAB/montly-php-sdk/contributors"
+    }
+  ],
+  "require": {
+    "php": ">=5.6",
+    "ext-curl": "*",
+    "ext-json": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~5.7"
+  },
+  "autoload": {
+    "psr-4": { "Montly\\" : "src/" }
+  },
+  "scripts": {
+    "test": "phpunit"
+  }
+}
