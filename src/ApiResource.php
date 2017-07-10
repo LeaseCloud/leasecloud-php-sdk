@@ -62,4 +62,12 @@ abstract class ApiResource
         list($response) = static::_staticRequest('post', $url, $params);
         return $response;
     }
+
+    protected static function _retrieve($id = null, $params = [])
+    {
+        $url = static::classUrl();
+        if ($id) $url = $url . '/' . $id;
+        list($response) = static::_staticRequest('get', $url, $params);
+        return $response;
+    }
 }
