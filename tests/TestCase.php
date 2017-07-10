@@ -21,9 +21,9 @@ class TestCase extends \PHPUnit_Framework_TestCase
 
     protected function mockRequest($method, $path, $params = array(), $return = array('id' => 42), $rcode = 200, $base = 'https://api.montly.com')
     {
-        $mock->expects($this->at($this->call++))
+        $this->mock->expects($this->at($this->call++))
              ->method('request')
-            //  ->with(strtolower($method), $base . $path, $this->anything(), $params, false)
+             ->with(strtolower($method), $base . $path, $params, $this->anything())
              ->willReturn(array(json_decode(json_encode($return)), $rcode, array()));
     }
 
