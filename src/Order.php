@@ -2,17 +2,16 @@
 
 namespace Montly;
 
-class Order
+class Order extends ApiResource
 {
 
     public static function create ($order, $items)
     {
-        $http = HttpClient\CurlClient::instance();
-        $headers = [
-            'Authorization: Bearer '. Montly::getApiKey(),
-            'Content-Type: application/json'
-        ];
+        $data = self::toJsonApi($order, $items);
+        return self::_create($data);
+    }
 
+    public static function toJsonApi($order, $items) {
         $order['itemsCount'] = count($items);
         $data = [
             'data' => [
@@ -26,7 +25,7 @@ class Order
             ]
         ];
 
-        return $http->request('post', Montly::$apiBase .'/v1/orders', $headers, $data)[0];
+        return $data;
     }
 
 }

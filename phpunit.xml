@@ -1,4 +1,4 @@
-<phpunit bootstrap="vendor/autoload.php" colors="true">
+<phpunit bootstrap="tests/bootstrap.php" colors="true">
     <testsuites>
         <testsuite name="Montly PHP SDK Test Suite">
             <directory suffix="Test.php">tests</directory>

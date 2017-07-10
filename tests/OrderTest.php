@@ -2,17 +2,17 @@
 
 namespace Montly;
 
-use PHPUnit\Framework\TestCase;
-
 /**
  * @covers Montly
  */
 class OrderTest extends TestCase
 {
+
+    public $mock;
+    public $call = 0;
+
     public function testCreateAnOrder ()
     {
-        Montly::setApiKey('nisses_nyckel');
-
         $order = [
             "orderId" => "c8e0bda3",
             "firstName" => "Matthew",
@@ -50,7 +50,28 @@ class OrderTest extends TestCase
             "VAT" => 62500
         ]];
 
+        $data = Order::toJsonApi($order, $items);
+        self::mockRequest('post', '/v1/orders', $data);
+
         $response = Order::create($order, $items);
         $this->assertEquals($response->id, 42);
+    }
+
+
+    protected function mockRequest($method, $path, $params = array(), $return = array('id' => 42), $rcode = 200, $base = 'https://api.montly.com')
+    {
+        $mock = $this->setUpMockRequest();
+        $mock->expects($this->at($this->call++))
+             ->method('request')
+             ->with(strtolower($method), $base . $path, $params, $this->anything())
+             ->willReturn(array(json_decode(json_encode($return)), $rcode, array()));
+    }
+    private function setUpMockRequest()
+    {
+        if (!$this->mock) {
+            $this->mock = $this->createMock('\Montly\HttpClient\ClientInterface');
+            ApiRequestor::setHttpClient($this->mock);
+        }
+        return $this->mock;
     }
 }

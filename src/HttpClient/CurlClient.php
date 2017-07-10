@@ -14,7 +14,7 @@ class CurlClient implements ClientInterface
         return self::$instance;
     }
 
-    public function request($method, $absUrl, $headers, $params)
+    public function request($method, $absUrl, $params, $headers)
     {
         $curl = curl_init();
         $method = strtolower($method);
