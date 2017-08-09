@@ -18,7 +18,7 @@ class OrderTest extends TestCase
             "orgNumber" => "559089-4308",
             "email" => "hunter@example.com",
             "phone" => "09 61 64 48 49",
-            "totalPrice" => 1000000,
+            "totalAmount" => 1000000,
             "VAT" => 250000,
             "shipping" => 0,
             "shippingVAT" => 0,
@@ -26,31 +26,35 @@ class OrderTest extends TestCase
             "currency" => "SEK",
             "months" => 24,
             "tariff" => 3,
-            "billingAddress" => "Rue 23",
-            "billingCity" => "Chamonix",
-            "billingPostcode" => "74400",
-            "billingCountry" => "France",
-            "monthlyPrice" => 231000
+            "billing" => [
+              "address" => "Rue 23",
+              "city" => "Chamonix",
+              "postcode" => "74400",
+              "country" => "SE"
+            ],
+            "monthlyAmount" => 231000
         ];
 
         $items = [[
             "name" => "Pixel",
             "productId" => "06ea2ff0b55c",
             "quantity" => 1,
-            "totalPrice" => 750000,
+            "totalAmount" => 750000,
+            "unitAmount" => 750000,
             "VAT" => 187500
         ], [
             "name" => "Green boat",
             "productId" => "043ff0b55c",
             "quantity" => 1,
-            "totalPrice" => 250000,
+            "totalAmount" => 250000,
+            "unitAmount" => 250000,
             "VAT" => 62500
         ]];
 
-        $data = Order::toJsonApi($order, $items);
-        self::mockRequest('post', '/v1/orders', $data);
+        $data = Order::toJson($order, $items);
+        self::mockRequest('post', '/v1/orders', $data, ['orderId' => 'c8e0bda3']);
 
         $response = Order::create($order, $items);
-        $this->assertEquals($response->id, 42);
+        $this->assertEquals($response->orderId, 'c8e0bda3');
     }
 }

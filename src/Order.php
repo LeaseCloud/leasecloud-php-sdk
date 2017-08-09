@@ -7,25 +7,14 @@ class Order extends ApiResource
 
     public static function create ($order, $items)
     {
-        $data = self::toJsonApi($order, $items);
+        $data = self::toJson($order, $items);
         return self::_create($data);
     }
 
-    public static function toJsonApi($order, $items) {
+    public static function toJson($order, $items) {
         $order['itemsCount'] = count($items);
-        $data = [
-            'data' => [
-                'type' => 'order',
-                'attributes' => $order,
-                'relationships' => [
-                    'item' => [
-                        'data' => $items
-                    ]
-                ]
-            ]
-        ];
-
-        return $data;
+        $order['items'] = $items;
+        return $order;
     }
 
 }
