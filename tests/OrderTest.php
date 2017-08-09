@@ -20,7 +20,7 @@ class OrderTest extends TestCase
             "phone" => "09 61 64 48 49",
             "totalAmount" => 1000000,
             "VAT" => 250000,
-            "shipping" => 0,
+            "shippingAmount" => 0,
             "shippingVAT" => 0,
             "customerIp" => "131.168.20.70",
             "currency" => "SEK",
