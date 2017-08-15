@@ -11,10 +11,19 @@ class ApiRequestor
     private $_apiBase;
     private static $_httpClient;
 
+    public function __construct($apiKey = null, $apiBase = null)
+    {
+        $this->_apiKey = $apiKey ? $apiKey : Montly::$apiKey;
+        if (!$this->_apiKey) throw new Error('No API key is set');
+
+        if (!$apiBase) $apiBase = Montly::$apiBase;
+        $this->_apiBase = $apiBase;
+    }
+
     function defaultHeaders()
     {
         return [
-            'Authorization: Bearer '. Montly::getApiKey(),
+            'Authorization: Bearer '. $this->_apiKey,
             'Content-Type: application/json'
         ];
     }
@@ -31,7 +40,7 @@ class ApiRequestor
     public function request($method, $url, $params = null, $headers = [])
     {
         $headers = array_merge(self::defaultHeaders(), $headers);
-        $absUrl = Montly::$apiBase . $url;
+        $absUrl = $this->_apiBase . $url;
         return $this->httpClient()->request($method, $absUrl, $params, $headers);
     }
 
