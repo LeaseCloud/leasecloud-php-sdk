@@ -32,29 +32,27 @@ class OrderTest extends TestCase
               "postcode" => "74400",
               "country" => "SE"
             ],
-            "monthlyAmount" => 231000
+            "monthlyAmount" => 231000,
+            "items" => [[
+                "name" => "Pixel",
+                "productId" => "06ea2ff0b55c",
+                "quantity" => 1,
+                "totalAmount" => 750000,
+                "unitAmount" => 750000,
+                "VAT" => 187500
+            ], [
+                "name" => "Green boat",
+                "productId" => "043ff0b55c",
+                "quantity" => 1,
+                "totalAmount" => 250000,
+                "unitAmount" => 250000,
+                "VAT" => 62500
+            ]]
         ];
 
-        $items = [[
-            "name" => "Pixel",
-            "productId" => "06ea2ff0b55c",
-            "quantity" => 1,
-            "totalAmount" => 750000,
-            "unitAmount" => 750000,
-            "VAT" => 187500
-        ], [
-            "name" => "Green boat",
-            "productId" => "043ff0b55c",
-            "quantity" => 1,
-            "totalAmount" => 250000,
-            "unitAmount" => 250000,
-            "VAT" => 62500
-        ]];
+        self::mockRequest('post', '/v1/orders', $order, ['orderId' => 'c8e0bda3']);
 
-        $data = Order::toJson($order, $items);
-        self::mockRequest('post', '/v1/orders', $data, ['orderId' => 'c8e0bda3']);
-
-        $response = Order::create($order, $items);
+        $response = Order::create($order);
         $this->assertEquals($response->orderId, 'c8e0bda3');
     }
 }
