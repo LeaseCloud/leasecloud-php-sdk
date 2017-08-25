@@ -3,7 +3,7 @@
 namespace Montly;
 
 /**
- * @covers Montly
+ * @covers Montly\Order
  */
 class OrderTest extends TestCase
 {
