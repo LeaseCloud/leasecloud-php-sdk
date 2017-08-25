@@ -68,7 +68,7 @@ class CurlClient implements ClientInterface
 
         // Create a callback to capture HTTP headers for the response
         $rheaders = array();
-        $headerCallback = function ($header_line) use (&$rheaders) {
+        $headerCallback = function ($curl, $header_line) use (&$rheaders) {
             // Ignore the HTTP request line (HTTP/1.1 200 OK)
             if (strpos($header_line, ":") === false) {
                 return strlen($header_line);
@@ -138,7 +138,7 @@ class CurlClient implements ClientInterface
         }
 
         $msg .= "\n\n(Network error [errno $errno]: $message)";
-        throw new Error($msg);
+        throw new \Montly\Error($msg);
     }
 
     /**
