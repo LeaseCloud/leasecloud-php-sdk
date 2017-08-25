@@ -9,16 +9,23 @@ namespace Montly;
  */
 abstract class ApiResource
 {
-    private static $HEADERS_TO_PERSIST = array('Stripe-Account' => true, 'Stripe-Version' => true);
-
+    /**
+     * Return the base url for the Montly API
+     *
+     * @return string
+     *
+     */
     public static function baseUrl()
     {
         return Montly::$apiBase;
     }
 
     /**
-     * @return string The name of the class, with namespacing and underscores
-     *    stripped.
+     * Return the name of the class, with namespacing and underscores
+     * stripped.
+     *
+     * @return string The name
+     *
      */
     public static function className()
     {
@@ -49,25 +56,50 @@ abstract class ApiResource
         return "/v1/${base}s";
     }
 
-    protected static function _staticRequest($method, $url, $params)
+    /**
+     * Make the http GET or POST request
+     *
+     * @param string $method
+     * @param string $url
+     * @param array|null $params
+     *
+     * @return array
+     */
+    protected static function staticRequest($method, $url, $params)
     {
         $requestor = new ApiRequestor();
         list($response) = $requestor->request($method, $url, $params);
         return array($response);
     }
 
-    protected static function _create($params = null, $options = null)
+    /**
+     * Create (post) a resource via the remote API
+     *
+     * @param array|null $params
+     *
+     * @return mixed
+     */
+    protected static function create($params = null)
     {
         $url = static::classUrl();
-        list($response) = static::_staticRequest('post', $url, $params);
+        list($response) = static::staticRequest('post', $url, $params);
         return $response;
     }
 
-    protected static function _retrieve($id = null, $params = [])
+    /**
+     * Retrieve (get) data from the remote API
+     *
+     * @param null $id
+     * @param array $params
+     * @return mixed
+     */
+    protected static function retrieve($id = null, $params = [])
     {
         $url = static::classUrl();
-        if ($id) $url = $url . '/' . $id;
-        list($response) = static::_staticRequest('get', $url, $params);
+        if ($id) {
+            $url = $url . '/' . $id;
+        }
+        list($response) = static::staticRequest('get', $url, $params);
         return $response;
     }
 }
