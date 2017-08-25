@@ -7,8 +7,7 @@ namespace Montly;
  */
 class OrderTest extends TestCase
 {
-
-    public function testCreateAnOrder ()
+    public function testCreateAnOrder()
     {
         $order = [
             "orderId" => "c8e0bda3",
