@@ -31,6 +31,7 @@ class StagingTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group createorder
      * @depends testCreateOrderSuccessful
      */
     public function testCreateOrderFailDuplicate($order)
@@ -70,6 +71,7 @@ class StagingTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group createorder
      * @depends testCreateOrderSuccessful
      */
     public function testGetOrderStatus($order)
@@ -85,6 +87,7 @@ class StagingTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group createorder
      * @depends testCreateOrderSuccessful
      */
     public function testCancel($order)
