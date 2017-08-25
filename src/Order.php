@@ -1,13 +1,20 @@
 <?php
-
 namespace Montly;
 
+/**
+ * Class Order
+ * @package Montly
+ */
 class Order extends ApiResource
 {
-
-    public static function create ($order)
+    /**
+     * Create (post) a new order
+     *
+     * @param null $order
+     * @return mixed
+     */
+    public static function create($order = null)
     {
-        return self::_create($order);
+        return parent::create($order);
     }
-
 }
