@@ -28,7 +28,7 @@ class OrderTest extends TestCase
             "billing" => [
               "address" => "Rue 23",
               "city" => "Chamonix",
-              "postcode" => "74400",
+              "postalCode" => "74400",
               "country" => "SE"
             ],
             "monthlyAmount" => 231000,
