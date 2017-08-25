@@ -1,11 +1,24 @@
 <?php
-
 namespace Montly\HttpClient;
 
+/**
+ * Class CurlClient
+ * @package Montly\HttpClient
+ */
 class CurlClient implements ClientInterface
 {
+    /**
+     * Static instance
+     *
+     * @var CurlClient
+     */
     private static $instance;
 
+    /**
+     * Get (and create if needed) the single CurlClient instance
+     *
+     * @return CurlClient
+     */
     public static function instance()
     {
         if (!self::$instance) {
@@ -14,6 +27,19 @@ class CurlClient implements ClientInterface
         return self::$instance;
     }
 
+    /**
+     * Make the request
+     *
+     * @param string $method
+     * @param string $absUrl
+     * @param array $params
+     * @param array $headers
+     *
+     * @return array A zero indexed array.
+     *   0 => Response
+     *   1 => Response http code
+     *   2 => Array of response headers
+     */
     public function request($method, $absUrl, $params, $headers)
     {
         $curl = curl_init();
@@ -42,7 +68,7 @@ class CurlClient implements ClientInterface
 
         // Create a callback to capture HTTP headers for the response
         $rheaders = array();
-        $headerCallback = function ($curl, $header_line) use (&$rheaders) {
+        $headerCallback = function ($header_line) use (&$rheaders) {
             // Ignore the HTTP request line (HTTP/1.1 200 OK)
             if (strpos($header_line, ":") === false) {
                 return strlen($header_line);
@@ -80,7 +106,7 @@ class CurlClient implements ClientInterface
             $errno = curl_errno($curl);
             $message = curl_error($curl);
             curl_close($curl);
-            $this->handleCurlError($absUrl, $errno, $message);
+            $this->handleCurlError($errno, $message);
         }
 
         $rcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
@@ -89,11 +115,13 @@ class CurlClient implements ClientInterface
     }
 
     /**
+     * Throw an exception with message indicating type of http error
+     *
      * @param number $errno
      * @param string $message
      * @throws Error
      */
-    private function handleCurlError($url, $errno, $message)
+    private function handleCurlError($errno, $message)
     {
         switch ($errno) {
             case CURLE_COULDNT_CONNECT:
@@ -122,7 +150,7 @@ class CurlClient implements ClientInterface
     public static function urlEncode($arr, $prefix = null)
     {
         if (!is_array($arr)) {
-            return $arr;
+            return (string)$arr;
         }
         $r = array();
         foreach ($arr as $k => $v) {
