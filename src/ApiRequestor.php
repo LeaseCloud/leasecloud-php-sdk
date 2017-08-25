@@ -1,5 +1,7 @@
 <?php
+
 namespace Montly;
+
 /**
  * Class ApiRequestor
  *
@@ -7,28 +9,45 @@ namespace Montly;
  */
 class ApiRequestor
 {
-    private $_apiKey;
-    private $_apiBase;
-    private static $_httpClient;
+    private $apiKey;
+    private $apiBase;
+    private static $httpClient;
 
+    /**
+     * ApiRequestor constructor.
+     *
+     * @param null $apiKey
+     * @param null $apiBase
+     */
     public function __construct($apiKey = null, $apiBase = null)
     {
-        $this->_apiKey = $apiKey ? $apiKey : Montly::$apiKey;
-        if (!$this->_apiKey) throw new Error('No API key is set');
+        $this->apiKey = $apiKey ? $apiKey : Montly::$apiKey;
+        if (!$this->apiKey) {
+            throw new Error('No API key is set');
+        }
 
-        if (!$apiBase) $apiBase = Montly::$apiBase;
-        $this->_apiBase = $apiBase;
+        if (!$apiBase) {
+            $apiBase = Montly::$apiBase;
+        }
+        $this->apiBase = $apiBase;
     }
 
-    function defaultHeaders()
+    /**
+     * Return default headers
+     *
+     * @return array
+     */
+    private function defaultHeaders()
     {
         return [
-            'Authorization: Bearer '. $this->_apiKey,
+            'Authorization: Bearer ' . $this->apiKey,
             'Content-Type: application/json'
         ];
     }
 
     /**
+     * Make an API request
+     *
      * @param string $method
      * @param string $url
      * @param array|null $params
@@ -40,20 +59,31 @@ class ApiRequestor
     public function request($method, $url, $params = null, $headers = [])
     {
         $headers = array_merge(self::defaultHeaders(), $headers);
-        $absUrl = $this->_apiBase . $url;
+        $absUrl = $this->apiBase . $url;
         return $this->httpClient()->request($method, $absUrl, $params, $headers);
     }
 
+    /**
+     * Externally set the http client instead of using the
+     * default http client (Montly\HttpCluent\CurlClient)
+     *
+     * @param $client
+     */
     public static function setHttpClient($client)
     {
-        self::$_httpClient = $client;
+        self::$httpClient = $client;
     }
 
+    /**
+     * If needed create, and return a http client
+     *
+     * @return HttpClient\CurlClient
+     */
     private function httpClient()
     {
-        if (!self::$_httpClient) {
-            self::$_httpClient = HttpClient\CurlClient::instance();
+        if (!self::$httpClient) {
+            self::$httpClient = HttpClient\CurlClient::instance();
         }
-        return self::$_httpClient;
+        return self::$httpClient;
     }
 }
