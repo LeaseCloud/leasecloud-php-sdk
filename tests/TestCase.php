@@ -14,6 +14,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         Montly::setApiKey(self::API_KEY);
+        Montly::$apiBase = 'https://api.montly.com';
         $this->mock = $this->setUpMockRequest();
         $this->call = 0;
     }
