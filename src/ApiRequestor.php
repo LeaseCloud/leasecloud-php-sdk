@@ -18,6 +18,8 @@ class ApiRequestor
      *
      * @param null $apiKey
      * @param null $apiBase
+     *
+     * @throws Error
      */
     public function __construct($apiKey = null, $apiBase = null)
     {
