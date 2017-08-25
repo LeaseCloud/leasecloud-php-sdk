@@ -1,7 +1,10 @@
 <?php
-
 namespace Montly\HttpClient;
 
+/**
+ * Interface ClientInterface
+ * @package Montly\HttpClient
+ */
 interface ClientInterface
 {
     /**
