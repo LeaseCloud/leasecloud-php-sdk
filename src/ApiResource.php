@@ -68,8 +68,8 @@ abstract class ApiResource
     protected static function staticRequest($method, $url, $params)
     {
         $requestor = new ApiRequestor();
-        list($response) = $requestor->request($method, $url, $params);
-        return array($response);
+        list($response, $code) = $requestor->request($method, $url, $params);
+        return array($response, $code);
     }
 
     /**
