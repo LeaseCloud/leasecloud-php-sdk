@@ -39,8 +39,18 @@ Please see [http://montly.io](http://montly.io) for up-to-date documentation abo
 
 ## Getting started
 
-### Creating an order
+### Getting your tariffs
 
+```php
+require_once('vendor/autoload.php');
+
+Montly\Montly::setApiKey(API_KEY);
+$tariffs = Montly\Tariff::retrieve();
+print_r($tariffs);
+
+```
+
+### Creating an order
 
 ```php
 require_once('vendor/autoload.php');
@@ -58,18 +68,28 @@ $order = [ "orderId" => $orderId,    // Unique id from your ecommerce system
             "tariff" => .05,         // Tariff
          ]
 
-Montly::setApiKey(API_KEY);
-$response = Order::create($order);
+Montly\Montly::setApiKey(API_KEY);
+$response = Montly\Order::create($order);
 if (isset($response->errors)) {
     // Something went wrong!
     // Error details in $response->errors array
     print_r($response);
 } else {
-    
+    // Success
 }
 
 ```
 
+### Checking order status
+
+```php
+require_once('vendor/autoload.php');
+$orderId = 'abc123'; 
+Montly::setApiKey(API_KEY);
+$response = Order::status($orderId);
+$status = $response->status;
+
+```
 
 
 
