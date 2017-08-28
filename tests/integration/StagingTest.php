@@ -23,7 +23,6 @@ class StagingTest extends \PHPUnit_Framework_TestCase
         $order = $this->dummyOrder();
         $orderId = $order['orderId'];
         $response = Order::create($order);
-        print_r($response);
         static::assertEquals($orderId, $response->orderId);
         static::assertEquals(50000, $response->monthlyAmount);
 
@@ -98,7 +97,8 @@ class StagingTest extends \PHPUnit_Framework_TestCase
         $orderId = $order['orderId'];
         $response = Order::cancel($orderId);
 
-        static::assertNull($response);
+        static::assertEquals(200, $response->code);
+        static::assertEquals('success', $response->status);
     }
 
     /**
@@ -113,7 +113,8 @@ class StagingTest extends \PHPUnit_Framework_TestCase
         $orderId = $order['orderId'];
         $response = Order::shipped($orderId, time());
 
-        static::assertNull($response);
+        static::assertEquals(204, $response->code);
+        static::assertEquals('success', $response->status);
     }
 
 
@@ -142,6 +143,23 @@ class StagingTest extends \PHPUnit_Framework_TestCase
             static::assertContains('Could not resolve host', (string)$e);
             static::assertContains('Could not connect', $e->getMessage());
         }
+    }
+
+    public function testGetTariff()
+    {
+        Montly::$apiBase = self::API_URL;
+        Montly::setApiKey(self::API_KEY);
+
+        $tariffs = Tariff::retrieve();
+        static::assertTrue(is_object($tariffs));
+        static::assertObjectHasAttribute('tariffs', $tariffs);
+
+        $arr = $tariffs->tariffs;
+        static::assertTrue(is_array($arr));
+        static::assertGreaterThan(1, count($arr));
+        static::assertTrue(is_object($arr[0]));
+        static::assertObjectHasAttribute('months', $arr[0]);
+        static::assertObjectHasAttribute('tariff', $arr[0]);
     }
 
     private function dummyOrder()

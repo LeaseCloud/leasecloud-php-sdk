@@ -5,7 +5,7 @@ namespace Montly;
 class TariffTest extends TestCase
 {
 
-    public function testGetTariff ()
+    public function testGetTariff()
     {
         $responseData = json_decode(json_encode([
           "tariffs" => [[
@@ -20,5 +20,23 @@ class TariffTest extends TestCase
 
         $response = Tariff::retrieve();
         $this->assertEquals($response, $responseData);
+    }
+
+    public function testMonthlyCost()
+    {
+        $tariffs = json_decode(json_encode([
+            "tariffs" => [[
+                "months" => 24,
+                "tariff" => 4.47
+            ], [
+                "months" => 36,
+                "tariff" => 3.04
+            ]]
+        ]));
+
+
+        static::assertEquals(357.5553, Tariff::monthlyCost(7999, 24, $tariffs));
+        static::assertEquals(243.1696, Tariff::monthlyCost(7999, 36, $tariffs));
+        static::assertNull(Tariff::monthlyCost(7999, 10, $tariffs));
     }
 }
