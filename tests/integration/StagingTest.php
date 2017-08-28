@@ -101,6 +101,22 @@ class StagingTest extends \PHPUnit_Framework_TestCase
         static::assertNull($response);
     }
 
+    /**
+     * @group createorder
+     * @depends testCreateOrderSuccessful
+     */
+    public function testShipped($order)
+    {
+        Montly::$apiBase = self::API_URL;
+        Montly::setApiKey(self::API_KEY);
+
+        $orderId = $order['orderId'];
+        $response = Order::shipped($orderId, time());
+
+        static::assertNull($response);
+    }
+
+
     public function testGetOrderStatusForNonexistingOrder()
     {
         Montly::$apiBase = self::API_URL;
