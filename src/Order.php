@@ -48,4 +48,22 @@ class Order extends ApiResource
         return $ret;
     }
 
+    /**
+     * Tell montly that an order is shipped
+     *
+     * @param string $orderId
+     * @param int    $shippedAt Unix timestamp
+     * @return mixed
+     */
+    public static function shipped($orderId, $shippedAt = 0)
+    {
+        $url = static::classUrl();
+        $url = $url . '/' . $orderId . '/shipped';
+        list($ret) = parent::staticRequest('post', $url, [
+            'shippedAt' => date('c', $shippedAt ? $shippedAt : time()),
+        ]);
+
+        return $ret;
+    }
+
 }
