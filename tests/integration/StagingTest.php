@@ -7,6 +7,16 @@ namespace Montly;
  */
 class StagingTest extends \PHPUnit_Framework_TestCase
 {
+    protected function setUp()
+    {
+        if (file_exists(dirname(dirname(__DIR__)) . '/localsettings.php')) {
+            require_once dirname(dirname(__DIR__)) . '/localsettings.php';
+        } else {
+            $this->markTestSkipped('File localsettings.php not found in project root. Integration tests skipped');
+        }
+
+        parent::setUp();
+    }
 
     const API_KEY = 'EriksApiKey';
     const API_URL = 'https://api.staging.montly.com';
@@ -17,8 +27,8 @@ class StagingTest extends \PHPUnit_Framework_TestCase
     public function testCreateOrderSuccessful()
     {
 
-        Montly::$apiBase = self::API_URL;
-        Montly::setApiKey(self::API_KEY);
+        Montly::$apiBase = TEST_API_URL;
+        Montly::setApiKey(TEST_API_KEY);
 
         $order = $this->dummyOrder();
         $orderId = $order['orderId'];
@@ -35,8 +45,8 @@ class StagingTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateOrderFailDuplicate($order)
     {
-        Montly::$apiBase = self::API_URL;
-        Montly::setApiKey(self::API_KEY);
+        Montly::$apiBase = TEST_API_URL;
+        Montly::setApiKey(TEST_API_KEY);
 
         $response = Order::create($order);
 
@@ -47,8 +57,8 @@ class StagingTest extends \PHPUnit_Framework_TestCase
 
     public function testCreateOrderFailFieldsMissing()
     {
-        Montly::$apiBase = self::API_URL;
-        Montly::setApiKey(self::API_KEY);
+        Montly::$apiBase = TEST_API_URL;
+        Montly::setApiKey(TEST_API_KEY);
 
         $order = $this->dummyOrder();
         unset($order['orderId']);
@@ -75,8 +85,8 @@ class StagingTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetOrderStatus($order)
     {
-        Montly::$apiBase = self::API_URL;
-        Montly::setApiKey(self::API_KEY);
+        Montly::$apiBase = TEST_API_URL;
+        Montly::setApiKey(TEST_API_KEY);
 
         $orderId = $order['orderId'];
         $response = Order::status($orderId);
@@ -91,8 +101,8 @@ class StagingTest extends \PHPUnit_Framework_TestCase
      */
     public function testCancel($order)
     {
-        Montly::$apiBase = self::API_URL;
-        Montly::setApiKey(self::API_KEY);
+        Montly::$apiBase = TEST_API_URL;
+        Montly::setApiKey(TEST_API_KEY);
 
         $orderId = $order['orderId'];
         $response = Order::cancel($orderId);
@@ -107,8 +117,8 @@ class StagingTest extends \PHPUnit_Framework_TestCase
      */
     public function testShipped($order)
     {
-        Montly::$apiBase = self::API_URL;
-        Montly::setApiKey(self::API_KEY);
+        Montly::$apiBase = TEST_API_URL;
+        Montly::setApiKey(TEST_API_KEY);
 
         $orderId = $order['orderId'];
         $response = Order::shipped($orderId, time());
@@ -120,8 +130,8 @@ class StagingTest extends \PHPUnit_Framework_TestCase
 
     public function testGetOrderStatusForNonexistingOrder()
     {
-        Montly::$apiBase = self::API_URL;
-        Montly::setApiKey(self::API_KEY);
+        Montly::$apiBase = TEST_API_URL;
+        Montly::setApiKey(TEST_API_KEY);
 
         $orderId = md5(microtime(true));
         $response = Order::status($orderId);
@@ -133,7 +143,7 @@ class StagingTest extends \PHPUnit_Framework_TestCase
     public function testNonexistingURL()
     {
         Montly::$apiBase = 'https://does.not.exist.com';
-        Montly::setApiKey(self::API_KEY);
+        Montly::setApiKey(TEST_API_KEY);
 
         $orderId = md5(microtime(true));
         try {
@@ -147,8 +157,8 @@ class StagingTest extends \PHPUnit_Framework_TestCase
 
     public function testGetTariff()
     {
-        Montly::$apiBase = self::API_URL;
-        Montly::setApiKey(self::API_KEY);
+        Montly::$apiBase = TEST_API_URL;
+        Montly::setApiKey(TEST_API_KEY);
 
         $tariffs = Tariff::retrieve();
         static::assertTrue(is_object($tariffs));
