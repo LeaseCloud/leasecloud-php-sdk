@@ -37,15 +37,18 @@ class Order extends ApiResource
      * Cancel an order
      *
      * @param string $orderId
-     * @return mixed
+     * @return object
      */
     public static function cancel($orderId)
     {
         $url = static::classUrl();
         $url = $url . '/' . $orderId . '/cancel';
-        list($ret) = parent::staticRequest('post', $url, []);
+        list($ret, $code) = parent::staticRequest('post', $url, []);
 
-        return $ret;
+        return (object)[
+            'code' => $code,
+            'status' => $code === 200? 'success' : 'failed'
+        ];
     }
 
     /**
@@ -53,17 +56,19 @@ class Order extends ApiResource
      *
      * @param string $orderId
      * @param int    $shippedAt Unix timestamp
-     * @return mixed
+     * @return object
      */
     public static function shipped($orderId, $shippedAt = 0)
     {
         $url = static::classUrl();
         $url = $url . '/' . $orderId . '/shipped';
-        list($ret) = parent::staticRequest('post', $url, [
+        list($ret, $code) = parent::staticRequest('post', $url, [
             'shippedAt' => date('c', $shippedAt ? $shippedAt : time()),
         ]);
 
-        return $ret;
+        return (object)[
+            'code' => $code,
+            'status' => $code === 204? 'success' : 'failed'
+        ];
     }
-
 }
