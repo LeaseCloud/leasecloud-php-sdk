@@ -6,21 +6,21 @@ jobs:
     steps:
       - checkout
       - run: composer install
-      - run: composer phpunit --exclude-group createorder
+      - run: vendor/bin/phpunit --exclude-group createorder
   build-php7.0:
     docker:
       - image: circleci/php:7.0-cli-node-browsers
     steps:
       - checkout
       - run: composer install
-      - run: composer phpunit --exclude-group createorder
+      - run: vendor/bin/phpunit --exclude-group createorder
   build-php7.1:
     docker:
       - image: circleci/php:7.1-cli-node-browsers
     steps:
       - checkout
       - run: composer install
-      - run: composer phpunit --exclude-group createorder
+      - run: vendor/bin/phpunit --exclude-group createorder
   codecov:
     docker:
       - image: circleci/php:7.1-cli-node-browsers
