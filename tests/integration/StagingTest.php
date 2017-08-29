@@ -18,9 +18,6 @@ class StagingTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
     }
 
-    const API_KEY = 'EriksApiKey';
-    const API_URL = 'https://api.staging.montly.com';
-
     /**
      * @group createorder
      */

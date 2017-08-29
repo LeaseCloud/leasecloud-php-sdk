@@ -129,8 +129,6 @@ if (isset($response->errors)) {
 
 ```
 
-Note that prices
-
 ### Checking order status
 
 ```php
@@ -200,7 +198,7 @@ Your applications can receive events from Montly using webhooks. Contact Montly 
 ```php
 require_once('vendor/autoload.php');
 
-Montly\Webook::setSecret(WEBHO_SECRET);
+Montly\Webook::setSecret(WEBHOOK_SECRET);
 $signature = $_SERVER['Montly-Signature'];
 $payload = file_get_contents('php://input');
 $valid = Montly\Webook::validateSignature($signature, $payload);
