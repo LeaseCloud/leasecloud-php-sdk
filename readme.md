@@ -1,7 +1,5 @@
 # Montly PHP SDK
 
-[![Build Status](https://travis-ci.org/montly/montly-php-sdk.svg?branch=master)](https://travis-ci.org/montly/montly-php-sdk)
-[![codecov](https://codecov.io/gh/montly/montly-php-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/montly/montly-php-sdk)
 [![License](https://poser.pugx.org/montly/montly-php-sdk/license.svg)](https://packagist.org/packages/montly/montly-php-sdk)
 
 Sign up for a Montly account at https://www.montly.com/sv/
