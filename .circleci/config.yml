@@ -5,22 +5,26 @@ jobs:
       - image: circleci/php:5.6-cli-node-browsers
     steps:
       - checkout
+      - run: composer require --dev --no-update phpunit/phpunit 5.7.5
       - run: composer install
-      - run: phpunit --exclude-group createorder
+      - run: bash .circleci/dependency.sh
+      - run: vendor/bin/phpunit --exclude-group createorder
   build-php7.0:
     docker:
       - image: circleci/php:7.0-cli-node-browsers
     steps:
       - checkout
       - run: composer install
-      - run: phpunit --exclude-group createorder
+      - run: bash .circleci/dependency.sh
+      - run: vendor/bin/phpunit --exclude-group createorder
   build-php7.1:
     docker:
       - image: circleci/php:7.1-cli-node-browsers
     steps:
       - checkout
       - run: composer install
-      - run: phpunit --exclude-group createorder
+      - run: bash .circleci/dependency.sh
+      - run: vendor/bin/phpunit --exclude-group createorder
   codecov:
     docker:
       - image: circleci/php:7.1-cli-node-browsers
@@ -34,4 +38,8 @@ workflows:
       - build-php5.6
       - build-php7.0
       - build-php7.1
-      - codecov
+      - codecov:
+          requires:
+            - build-php5.6
+            - build-php7.0
+            - build-php7.1
