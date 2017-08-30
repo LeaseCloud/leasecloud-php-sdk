@@ -37,7 +37,7 @@ workflows:
       - build-php5.6
       - build-php7.0
       - build-php7.1
-      - codecov
+      - codecov:
           requires:
             - build-php5.6
             - build-php7.0
