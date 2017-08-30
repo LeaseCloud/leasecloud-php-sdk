@@ -1,12 +1,10 @@
 <?php
 namespace Montly;
 
-use PHPUnit\Framework\TestCase;
-
 /**
  * @covers Montly\Montly
  */
-class MontlyTest extends TestCase
+class MontlyTest extends MontlyTestCase
 {
     public function testSetAndGetApiKey()
     {

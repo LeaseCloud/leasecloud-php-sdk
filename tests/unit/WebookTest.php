@@ -1,12 +1,10 @@
 <?php
 namespace Montly;
 
-use PHPUnit\Framework\TestCase;
-
 /**
  * @covers Montly\Webook
  */
-class WebookTest extends TestCase
+class WebookTest extends MontlyTestCase
 {
     public function testValidateSignature()
     {

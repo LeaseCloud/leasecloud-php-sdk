@@ -2,7 +2,7 @@
 
 namespace Montly;
 
-class TariffTest extends TestCase
+class TariffTest extends MontlyTestCase
 {
 
     public function testGetTariff()

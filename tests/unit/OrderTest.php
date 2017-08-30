@@ -5,7 +5,7 @@ namespace Montly;
 /**
  * @covers Montly\Order
  */
-class OrderTest extends TestCase
+class OrderTest extends MontlyTestCase
 {
     public function testCreateAnOrder()
     {

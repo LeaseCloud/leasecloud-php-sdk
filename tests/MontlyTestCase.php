@@ -5,7 +5,7 @@ namespace Montly;
  * Base class for Montly test cases, provides some utility methods for creating
  * objects.
  */
-class TestCase extends \PHPUnit_Framework_TestCase
+class MontlyTestCase extends \PHPUnit_Framework_TestCase
 {
     const API_KEY = 'dummyKey';
 
