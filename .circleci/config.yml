@@ -6,6 +6,7 @@ jobs:
     steps:
       - checkout
       - run: composer install
+      - run: bash .circleci/dependency.sh
       - run: vendor/bin/phpunit --exclude-group createorder
   build-php7.0:
     docker:
@@ -13,6 +14,7 @@ jobs:
     steps:
       - checkout
       - run: composer install
+      - run: bash .circleci/dependency.sh
       - run: vendor/bin/phpunit --exclude-group createorder
   build-php7.1:
     docker:
@@ -20,6 +22,7 @@ jobs:
     steps:
       - checkout
       - run: composer install
+      - run: bash .circleci/dependency.sh
       - run: vendor/bin/phpunit --exclude-group createorder
   codecov:
     docker:
@@ -35,3 +38,7 @@ workflows:
       - build-php7.0
       - build-php7.1
       - codecov
+          requires:
+            - build-php5.6
+            - build-php7.0
+            - build-php7.1
