@@ -1,6 +1,6 @@
 # Montly PHP SDK
 
-[![CircleCI](https://circleci.com/gh/MontlyAB/montly-php-sdk/tree/master.svg?style=svg)](https://circleci.com/gh/MontlyAB/montly-php-sdk/tree/master) [![License](https://poser.pugx.org/montly/montly-php-sdk/license.svg)](https://packagist.org/packages/montlyab/montly-php-sdk)
+[![CircleCI](https://circleci.com/gh/MontlyAB/montly-php-sdk/tree/master.svg?style=svg)](https://circleci.com/gh/MontlyAB/montly-php-sdk/tree/master) [![License](https://poser.pugx.org/montlyab/montly-php-sdk/license.svg)](https://packagist.org/packages/montlyab/montly-php-sdk)
 
 Sign up for a Montly account at https://www.montly.com/sv/
 
