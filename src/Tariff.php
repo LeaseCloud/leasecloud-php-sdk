@@ -28,14 +28,14 @@ class Tariff extends ApiResource
      * @param integer $months  The agreement length
      * @param object  $tariffs The tariffs object, as returned by Tariff:retrieve
      *
-     * @return double|null The monthly cost for the end user
+     * @return integer|null The monthly cost for the end user
      */
     public static function monthlyCost($price, $months, $tariffs)
     {
 
         $tariff = static::tariff($months, $tariffs);
         if (!is_null($tariff)) {
-            return $price * ($tariff / 100);
+            return round($price * ($tariff / 100));
         }
 
         // If we're still here, it means that we don't have any tariff
