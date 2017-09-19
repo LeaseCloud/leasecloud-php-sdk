@@ -35,8 +35,8 @@ class TariffTest extends MontlyTestCase
         ]));
 
 
-        static::assertEquals(357.5553, Tariff::monthlyCost(7999, 24, $tariffs));
-        static::assertEquals(243.1696, Tariff::monthlyCost(7999, 36, $tariffs));
+        static::assertEquals(358, Tariff::monthlyCost(7999, 24, $tariffs));
+        static::assertEquals(243, Tariff::monthlyCost(7999, 36, $tariffs));
         static::assertNull(Tariff::monthlyCost(7999, 10, $tariffs));
     }
 }
