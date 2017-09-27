@@ -1,5 +1,5 @@
 {
-  "name": "LeaseCloud/leasecloud-php-sdk",
+  "name": "leasecloud/leasecloud-php-sdk",
   "description": "LeaseCloud PHP SDK",
   "keywords": [ "montly", "payments", "rest", "api", "sdk", "LeaseCloud" ],
   "homepage": "https://www.montly.com/",
