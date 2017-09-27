@@ -1,13 +1,13 @@
 {
-  "name": "montlyab/montly-php-sdk",
-  "description": "Montly PHP SDK",
-  "keywords": [ "montly", "payments", "rest", "api", "sdk" ],
+  "name": "LeaseCloud/leasecloud-php-sdk",
+  "description": "LeaseCloud PHP SDK",
+  "keywords": [ "montly", "payments", "rest", "api", "sdk", "LeaseCloud" ],
   "homepage": "https://www.montly.com/",
   "license": "MIT",
   "authors": [
     {
-      "name": "Montly",
-      "homepage": "https://github.com/MontlyAB/montly-php-sdk/contributors"
+      "name": "LeaseCloud",
+      "homepage": "https://github.com/LeaseCloud/leasecloud-php-sdk/contributors"
     }
   ],
   "require": {
