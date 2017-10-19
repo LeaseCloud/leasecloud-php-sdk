@@ -200,7 +200,7 @@ Your applications can receive events from Montly using webhooks. Contact Montly 
 require_once('vendor/autoload.php');
 
 Montly\Webook::setSecret(WEBHOOK_SECRET);
-$signature = $_SERVER['Montly-Signature'];
+$signature = $_SERVER['LeaseCloud-Signature'];
 $payload = file_get_contents('php://input');
 $valid = Montly\Webook::validateSignature($signature, $payload);
 
