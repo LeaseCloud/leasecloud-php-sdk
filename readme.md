@@ -99,17 +99,17 @@ $vat = 0.25;
 $months = 36;
 $monthlyAmount = Montly\Tariff::monthlyCost($totalAmount, $months, $tariffs);
 
-$order = [ 
+$order = [
            "orderId"        => $orderId,      // Unique id from your ecommerce system
            "firstName"      => "Stan",
            "lastName"       => "Hunter",
             "customerIp"    => "..",          // Valid IP-number
             "months"        => $months,       // Length of leasing agreement
             "tariff"        => $tariff,       // Tariff used
-            
+
             // All price data is entered as integers of the smallest
             // currency amount E.g. 1 SEK = 100 ören, 1 USD = 100 cent
-            
+
             "totalAmount"   => (int)($totalAmount * 100),
             "VAT"           => (int)($totalAmount * $vat * 100),
             "monthlyAmount" => (int)($monthlyAmount * 100),
@@ -135,7 +135,7 @@ if (isset($response->errors)) {
 ```php
 require_once('vendor/autoload.php');
 
-$orderId = 'abc123'; 
+$orderId = 'abc123';
 Montly\Montly::setApiKey(API_KEY);
 $response = Order::status($orderId);
 print_r($response);
@@ -156,7 +156,7 @@ If you need to cancel an order:
 ```php
 require_once('vendor/autoload.php');
 
-$orderId = 'abc123'; 
+$orderId = 'abc123';
 Montly\Montly::setApiKey(API_KEY);
 $response = Order::cancel($orderId);
 print_r($response);
@@ -176,7 +176,7 @@ When an approved order is shipped, your ecommerce system should notify Montly:
 ```php
 require_once('vendor/autoload.php');
 
-$orderId = 'abc123'; 
+$orderId = 'abc123';
 Montly\Montly::setApiKey(API_KEY);
 $response = Order::shipped($orderId);
 print_r($response);
