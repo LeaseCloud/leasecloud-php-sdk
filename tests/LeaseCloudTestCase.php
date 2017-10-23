@@ -14,12 +14,12 @@ class LeaseCloudTestCase extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         LeaseCloud::setApiKey(self::API_KEY);
-        LeaseCloud::$apiBase = 'https://api.montly.com';
+        LeaseCloud::$apiBase = 'https://api.leasecloud.com';
         $this->mock = $this->setUpMockRequest();
         $this->call = 0;
     }
 
-    protected function mockRequest($method, $path, $params = array(), $return = array('id' => 42), $rcode = 200, $base = 'https://api.montly.com')
+    protected function mockRequest($method, $path, $params = array(), $return = array('id' => 42), $rcode = 200, $base = 'https://api.leasecloud.com')
     {
         $this->mock->expects($this->at($this->call++))
              ->method('request')
