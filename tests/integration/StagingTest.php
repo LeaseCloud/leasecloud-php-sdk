@@ -23,8 +23,7 @@ class StagingTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateOrderSuccessful()
     {
-
-        LeaseCloud::$apiBase = TEST_API_URL;
+        LeaseCloud::setApiBase(TEST_API_URL);
         LeaseCloud::setApiKey(TEST_API_KEY);
 
         $order = $this->dummyOrder();
@@ -42,7 +41,7 @@ class StagingTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateOrderFailDuplicate($order)
     {
-        LeaseCloud::$apiBase = TEST_API_URL;
+        LeaseCloud::setApiBase(TEST_API_URL);
         LeaseCloud::setApiKey(TEST_API_KEY);
 
         $response = Order::create($order);
@@ -53,7 +52,7 @@ class StagingTest extends \PHPUnit_Framework_TestCase
 
     public function testCreateOrderFailFieldsMissing()
     {
-        LeaseCloud::$apiBase = TEST_API_URL;
+        LeaseCloud::setApiBase(TEST_API_URL);
         LeaseCloud::setApiKey(TEST_API_KEY);
 
         $order = $this->dummyOrder();
@@ -77,7 +76,7 @@ class StagingTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetOrderStatus($order)
     {
-        LeaseCloud::$apiBase = TEST_API_URL;
+        LeaseCloud::setApiBase(TEST_API_URL);
         LeaseCloud::setApiKey(TEST_API_KEY);
 
         $orderId = $order['orderId'];
@@ -97,7 +96,7 @@ class StagingTest extends \PHPUnit_Framework_TestCase
      */
     public function testCancel($order)
     {
-        LeaseCloud::$apiBase = TEST_API_URL;
+        LeaseCloud::setApiBase(TEST_API_URL);
         LeaseCloud::setApiKey(TEST_API_KEY);
 
         $orderId = $order['orderId'];
@@ -113,7 +112,7 @@ class StagingTest extends \PHPUnit_Framework_TestCase
      */
     public function testShipped($order)
     {
-        LeaseCloud::$apiBase = TEST_API_URL;
+        LeaseCloud::setApiBase(TEST_API_URL);
         LeaseCloud::setApiKey(TEST_API_KEY);
 
         $orderId = $order['orderId'];
@@ -126,7 +125,7 @@ class StagingTest extends \PHPUnit_Framework_TestCase
 
     public function testGetOrderStatusForNonexistingOrder()
     {
-        LeaseCloud::$apiBase = TEST_API_URL;
+        LeaseCloud::setApiBase(TEST_API_URL);
         LeaseCloud::setApiKey(TEST_API_KEY);
 
         $orderId = md5(microtime(true));
@@ -137,7 +136,7 @@ class StagingTest extends \PHPUnit_Framework_TestCase
 
     public function testNonexistingURL()
     {
-        LeaseCloud::$apiBase = 'https://does.not.exist.com';
+        LeaseCloud::setApiBase(TEST_API_URL);
         LeaseCloud::setApiKey(TEST_API_KEY);
 
         $orderId = md5(microtime(true));
@@ -152,7 +151,7 @@ class StagingTest extends \PHPUnit_Framework_TestCase
 
     public function testGetTariff()
     {
-        LeaseCloud::$apiBase = TEST_API_URL;
+        LeaseCloud::setApiBase(TEST_API_URL);
         LeaseCloud::setApiKey(TEST_API_KEY);
 
         $tariffs = Tariff::retrieve();

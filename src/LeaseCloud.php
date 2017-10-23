@@ -41,5 +41,15 @@ class LeaseCloud
         self::$apiKey = $apiKey;
     }
 
+    /**
+     * Sets the API base
+     *
+     * @param string $apiBase
+     */
+    public static function setApiBase($apiBase)
+    {
+        self::$apiBase = $apiBase;
+    }
+
 
 }
