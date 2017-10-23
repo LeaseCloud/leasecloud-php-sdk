@@ -1,12 +1,12 @@
 <?php
-namespace Montly;
+namespace LeaseCloud;
 
 use Exception;
 
 /**
  * Class Error
  *
- * @package Montly
+ * @package LeaseCloud
  */
 class Error extends Exception
 {

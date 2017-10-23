@@ -3,7 +3,7 @@
 [![CircleCI](https://circleci.com/gh/LeaseCloud/leasecloud-php-sdk/tree/master.svg?style=svg)](https://circleci.com/gh/LeaseCloud/leasecloud-php-sdk/tree/master) [![Latest Stable Version](https://poser.pugx.org/leasecloud/leasecloud-php-sdk/version)](https://packagist.org/packages/leasecloud/leasecloud-php-sdk) [![License](https://poser.pugx.org/leasecloud/leasecloud-php-sdk/license.svg)](https://packagist.org/leasecloud/leasecloud-php-sdk)
 
 
-Sign up for a LeaseCloud account at https://www.montly.com/sv/
+Sign up for a LeaseCloud account at https://www.leasecloud.se
 
 ## Requirements
 
@@ -14,7 +14,7 @@ PHP 5.6 and later.
 You can install the bindings via [Composer](http://getcomposer.org/). Run the following command:
 
 ```bash
-composer require montlyab/montly-php-sdk
+composer require leasecloud/leasecloud-php-sdk
 ```
 
 To use the bindings, use Composer's [autoload](https://getcomposer.org/doc/00-intro.md#autoloading):
@@ -34,7 +34,7 @@ If you use Composer, these dependencies should be handled automatically. If you 
 
 ## Documentation
 
-Please see [http://montly.io](http://montly.io) for up-to-date documentation about the underlying REST API.
+Please see [http://leasecloud.io](http://leasecloud.io) for up-to-date documentation about the underlying REST API.
 
 ## Using the SDK
 
@@ -44,8 +44,8 @@ Please see [http://montly.io](http://montly.io) for up-to-date documentation abo
 ```php
 require_once('vendor/autoload.php');
 
-Montly\Montly::setApiKey(API_KEY);
-$tariffs = Montly\Tariff::retrieve();
+LeaseCloud\LeaseCloud::setApiKey(API_KEY);
+$tariffs = LeaseCloud\Tariff::retrieve();
 print_r($tariffs);
 
 Output:
@@ -89,15 +89,15 @@ double(243.1696)
 require_once('vendor/autoload.php');
 
 /*
-  See http://montly.io/#create-a-new-order for complete set of fields
+  See http://leasecloud.io/#create-a-new-order for complete set of fields
 */
 
 $tariffs = ... // Read from your cache
-$tariff = Montly\Tariff::tariff($months, $tariffs);
+$tariff = LeaseCloud\Tariff::tariff($months, $tariffs);
 $totalAmount = 9000; // 9000 SEK
 $vat = 0.25;
 $months = 36;
-$monthlyAmount = Montly\Tariff::monthlyCost($totalAmount, $months, $tariffs);
+$monthlyAmount = LeaseCloud\Tariff::monthlyCost($totalAmount, $months, $tariffs);
 
 $order = [
            "orderId"        => $orderId,      // Unique id from your ecommerce system
@@ -117,8 +117,8 @@ $order = [
             ...
          ]
 
-Montly\Montly::setApiKey(API_KEY);
-$response = Montly\Order::create($order);
+LeaseCloud\LeaseCloud::setApiKey(API_KEY);
+$response = LeaseCloud\Order::create($order);
 
 if (isset($response->errors)) {
     // Something went wrong!
@@ -136,7 +136,7 @@ if (isset($response->errors)) {
 require_once('vendor/autoload.php');
 
 $orderId = 'abc123';
-Montly\Montly::setApiKey(API_KEY);
+LeaseCloud\LeaseCloud::setApiKey(API_KEY);
 $response = Order::status($orderId);
 print_r($response);
 
@@ -157,7 +157,7 @@ If you need to cancel an order:
 require_once('vendor/autoload.php');
 
 $orderId = 'abc123';
-Montly\Montly::setApiKey(API_KEY);
+LeaseCloud\LeaseCloud::setApiKey(API_KEY);
 $response = Order::cancel($orderId);
 print_r($response);
 
@@ -171,13 +171,13 @@ stdClass Object
 
 ### Mark an order as shipped
 
-When an approved order is shipped, your ecommerce system should notify Montly:
+When an approved order is shipped, your ecommerce system should notify LeaseCloud:
 
 ```php
 require_once('vendor/autoload.php');
 
 $orderId = 'abc123';
-Montly\Montly::setApiKey(API_KEY);
+LeaseCloud\LeaseCloud::setApiKey(API_KEY);
 $response = Order::shipped($orderId);
 print_r($response);
 
@@ -192,17 +192,17 @@ stdClass Object
 
 ## Webhooks
 
-Your applications can receive events from Montly using webhooks. Contact Montly support to set your webhook URL. You will also receive a WEBHOOK_SECRET to be used when validating the origin of requests to your webhook URL.
+Your applications can receive events from LeaseCloud using webhooks. Contact LeaseCloud support to set your webhook URL. You will also receive a WEBHOOK_SECRET to be used when validating the origin of requests to your webhook URL.
 
 ### Validating a webhook
 
 ```php
 require_once('vendor/autoload.php');
 
-Montly\Webook::setSecret(WEBHOOK_SECRET);
+LeaseCloud\Webook::setSecret(WEBHOOK_SECRET);
 $signature = $_SERVER['LeaseCloud-Signature'];
 $payload = file_get_contents('php://input');
-$valid = Montly\Webook::validateSignature($signature, $payload);
+$valid = LeaseCloud\Webook::validateSignature($signature, $payload);
 
 if ($valid) {
 	$json = json_decode($payload);

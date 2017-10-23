@@ -1,23 +1,23 @@
 <?php
 
-namespace Montly;
+namespace LeaseCloud;
 
 /**
  * Class ApiResource
  *
- * @package Montly
+ * @package LeaseCloud
  */
 abstract class ApiResource
 {
     /**
-     * Return the base url for the Montly API
+     * Return the base url for the LeaseCloud API
      *
      * @return string
      *
      */
     public static function baseUrl()
     {
-        return Montly::$apiBase;
+        return LeaseCloud::$apiBase;
     }
 
     /**
@@ -38,8 +38,8 @@ abstract class ApiResource
         if ($postfixFakeNamespaces = strrchr($class, '')) {
             $class = $postfixFakeNamespaces;
         }
-        if (substr($class, 0, strlen('Montly')) == 'Montly') {
-            $class = substr($class, strlen('Montly'));
+        if (substr($class, 0, strlen('LeaseCloud')) == 'LeaseCloud') {
+            $class = substr($class, strlen('LeaseCloud'));
         }
         $class = str_replace('_', '', $class);
         $name = urlencode($class);

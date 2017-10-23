@@ -1,8 +1,8 @@
 {
   "name": "leasecloud/leasecloud-php-sdk",
   "description": "LeaseCloud PHP SDK",
-  "keywords": [ "montly", "payments", "rest", "api", "sdk", "LeaseCloud" ],
-  "homepage": "https://www.montly.com/",
+  "keywords": [ "leasecloud", "payments", "rest", "api", "sdk", "LeaseCloud" ],
+  "homepage": "https://www.leasecloud.com/",
   "license": "MIT",
   "authors": [
     {
@@ -19,7 +19,7 @@
     "phpunit/phpunit": "~5.7"
   },
   "autoload": {
-    "psr-4": { "Montly\\" : "src/" }
+    "psr-4": { "LeaseCloud\\" : "src/" }
   },
   "scripts": {
     "test": "phpunit"

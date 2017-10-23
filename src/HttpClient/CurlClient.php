@@ -1,9 +1,9 @@
 <?php
-namespace Montly\HttpClient;
+namespace LeaseCloud\HttpClient;
 
 /**
  * Class CurlClient
- * @package Montly\HttpClient
+ * @package LeaseCloud\HttpClient
  */
 class CurlClient implements ClientInterface
 {
@@ -138,7 +138,7 @@ class CurlClient implements ClientInterface
         }
 
         $msg .= "\n\n(Network error [errno $errno]: $message)";
-        throw new \Montly\Error($msg);
+        throw new \LeaseCloud\Error($msg);
     }
 
     /**

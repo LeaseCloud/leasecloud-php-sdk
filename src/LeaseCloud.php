@@ -1,26 +1,26 @@
 <?php
-namespace Montly;
+namespace LeaseCloud;
 
 /**
- * Class Montly
+ * Class LeaseCloud
  *
- * @package Montly
+ * @package LeaseCloud
  */
-class Montly
+class LeaseCloud
 {
     /**
-     * The Montly API key to be used for requests.
+     * The LeaseCloud API key to be used for requests.
      *
      * @var string
      */
     public static $apiKey;
 
     /**
-     * The base URL for the Montly API.
+     * The base URL for the LeaseCloud API.
      *
      * @var string
      */
-    public static $apiBase = 'https://api.montly.com';
+    public static $apiBase = 'https://api.leasecloud.com';
 
     /**
      * Gets the API key to be used for requests.

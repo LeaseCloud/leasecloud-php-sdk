@@ -1,8 +1,8 @@
 <?php
-namespace Montly;
+namespace LeaseCloud;
 
 /**
- * Base class for Montly test cases, provides some utility methods for creating
+ * Base class for LeaseCloud test cases, provides some utility methods for creating
  * objects.
  */
 class StagingTest extends \PHPUnit_Framework_TestCase
@@ -24,8 +24,8 @@ class StagingTest extends \PHPUnit_Framework_TestCase
     public function testCreateOrderSuccessful()
     {
 
-        Montly::$apiBase = TEST_API_URL;
-        Montly::setApiKey(TEST_API_KEY);
+        LeaseCloud::$apiBase = TEST_API_URL;
+        LeaseCloud::setApiKey(TEST_API_KEY);
 
         $order = $this->dummyOrder();
         $orderId = $order['orderId'];
@@ -42,38 +42,33 @@ class StagingTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateOrderFailDuplicate($order)
     {
-        Montly::$apiBase = TEST_API_URL;
-        Montly::setApiKey(TEST_API_KEY);
+        LeaseCloud::$apiBase = TEST_API_URL;
+        LeaseCloud::setApiKey(TEST_API_KEY);
 
         $response = Order::create($order);
 
-        static::assertTrue(isset($response->errors));
-        static::assertEquals(1, count($response->errors));
-        static::assertEquals('Validation error', $response->errors[0]->title);
+        static::assertTrue(isset($response->error));
+        static::assertEquals('Validation error', $response->error->message);
     }
 
     public function testCreateOrderFailFieldsMissing()
     {
-        Montly::$apiBase = TEST_API_URL;
-        Montly::setApiKey(TEST_API_KEY);
+        LeaseCloud::$apiBase = TEST_API_URL;
+        LeaseCloud::setApiKey(TEST_API_KEY);
 
         $order = $this->dummyOrder();
         unset($order['orderId']);
         $response = Order::create($order);
 
-        static::assertTrue(isset($response->errors));
-        static::assertEquals(1, count($response->errors));
-        static::assertEquals('notNull Violation', $response->errors[0]->title);
-        static::assertTrue(stripos($response->errors[0]->detail, 'orderId') !== false);
+        static::assertTrue(isset($response->error));
+        static::assertEquals('Validation error', $response->error->message);
 
         $order = $this->dummyOrder();
         unset($order['orgNumber']);
         $response = Order::create($order);
 
-        static::assertTrue(isset($response->errors));
-        static::assertEquals(1, count($response->errors));
-        static::assertEquals('notNull Violation', $response->errors[0]->title);
-        static::assertTrue(stripos($response->errors[0]->detail, 'orgNumber') !== false);
+        static::assertTrue(isset($response->error));
+        static::assertEquals('Validation error', $response->error->message);
     }
 
     /**
@@ -82,14 +77,18 @@ class StagingTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetOrderStatus($order)
     {
-        Montly::$apiBase = TEST_API_URL;
-        Montly::setApiKey(TEST_API_KEY);
+        LeaseCloud::$apiBase = TEST_API_URL;
+        LeaseCloud::setApiKey(TEST_API_KEY);
 
         $orderId = $order['orderId'];
         $response = Order::status($orderId);
 
-        static::assertEquals($orderId, $response->orderId);
-        static::assertEquals('pending', $response->status);
+        static::assertObjectHasAttribute('statuses', $response);
+        foreach ($response->statuses as $status) {
+            static::assertObjectHasAttribute('code', $status);
+            static::assertObjectHasAttribute('setAt', $status);
+            static::assertObjectHasAttribute('message', $status);
+        }
     }
 
     /**
@@ -98,8 +97,8 @@ class StagingTest extends \PHPUnit_Framework_TestCase
      */
     public function testCancel($order)
     {
-        Montly::$apiBase = TEST_API_URL;
-        Montly::setApiKey(TEST_API_KEY);
+        LeaseCloud::$apiBase = TEST_API_URL;
+        LeaseCloud::setApiKey(TEST_API_KEY);
 
         $orderId = $order['orderId'];
         $response = Order::cancel($orderId);
@@ -114,8 +113,8 @@ class StagingTest extends \PHPUnit_Framework_TestCase
      */
     public function testShipped($order)
     {
-        Montly::$apiBase = TEST_API_URL;
-        Montly::setApiKey(TEST_API_KEY);
+        LeaseCloud::$apiBase = TEST_API_URL;
+        LeaseCloud::setApiKey(TEST_API_KEY);
 
         $orderId = $order['orderId'];
         $response = Order::shipped($orderId, time());
@@ -127,26 +126,25 @@ class StagingTest extends \PHPUnit_Framework_TestCase
 
     public function testGetOrderStatusForNonexistingOrder()
     {
-        Montly::$apiBase = TEST_API_URL;
-        Montly::setApiKey(TEST_API_KEY);
+        LeaseCloud::$apiBase = TEST_API_URL;
+        LeaseCloud::setApiKey(TEST_API_KEY);
 
         $orderId = md5(microtime(true));
         $response = Order::status($orderId);
 
-        static::assertTrue(isset($response->errors));
-        static::assertEquals(1, count($response->errors));
+        static::assertTrue(isset($response->error));
     }
 
     public function testNonexistingURL()
     {
-        Montly::$apiBase = 'https://does.not.exist.com';
-        Montly::setApiKey(TEST_API_KEY);
+        LeaseCloud::$apiBase = 'https://does.not.exist.com';
+        LeaseCloud::setApiKey(TEST_API_KEY);
 
         $orderId = md5(microtime(true));
         try {
             $response = Order::status($orderId);
         } catch (Error $e) {
-            static::assertContains('Montly', (string)$e);
+            static::assertContains('LeaseCloud', (string)$e);
             static::assertContains('Could not resolve host', (string)$e);
             static::assertContains('Could not connect', $e->getMessage());
         }
@@ -154,8 +152,8 @@ class StagingTest extends \PHPUnit_Framework_TestCase
 
     public function testGetTariff()
     {
-        Montly::$apiBase = TEST_API_URL;
-        Montly::setApiKey(TEST_API_KEY);
+        LeaseCloud::$apiBase = TEST_API_URL;
+        LeaseCloud::setApiKey(TEST_API_KEY);
 
         $tariffs = Tariff::retrieve();
         static::assertTrue(is_object($tariffs));
@@ -176,7 +174,7 @@ class StagingTest extends \PHPUnit_Framework_TestCase
             "orderId" => $orderId,
             "firstName" => "Matthew",
             "lastName" => "Hunter",
-            "company" => "Montly AB",
+            "company" => "LeaseCloud AB",
             "orgNumber" => "559089-4308",
             "email" => "hunter@example.com",
             "phone" => "09 61 64 48 49",

@@ -1,10 +1,10 @@
 <?php
-namespace Montly;
+namespace LeaseCloud;
 
 /**
- * @covers Montly\Webook
+ * @covers LeaseCloud\Webook
  */
-class WebookTest extends MontlyTestCase
+class WebookTest extends LeaseCloudTestCase
 {
     public function testValidateSignature()
     {

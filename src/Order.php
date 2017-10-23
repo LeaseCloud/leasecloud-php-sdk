@@ -1,9 +1,9 @@
 <?php
-namespace Montly;
+namespace LeaseCloud;
 
 /**
  * Class Order
- * @package Montly
+ * @package LeaseCloud
  */
 class Order extends ApiResource
 {
@@ -52,7 +52,7 @@ class Order extends ApiResource
     }
 
     /**
-     * Tell montly that an order is shipped
+     * Tell LeaseCloud that an order is shipped
      *
      * @param string $orderId
      * @param int    $shippedAt Unix timestamp

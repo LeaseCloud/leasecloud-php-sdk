@@ -1,11 +1,11 @@
 <?php
 
-namespace Montly;
+namespace LeaseCloud;
 
 /**
- * @covers Montly\Order
+ * @covers LeaseCloud\Order
  */
-class OrderTest extends MontlyTestCase
+class OrderTest extends LeaseCloudTestCase
 {
     public function testCreateAnOrder()
     {
@@ -13,7 +13,7 @@ class OrderTest extends MontlyTestCase
             "orderId" => "c8e0bda3",
             "firstName" => "Matthew",
             "lastName" => "Hunter",
-            "company" => "Montly AB",
+            "company" => "LeaseCloud AB",
             "orgNumber" => "559089-4308",
             "email" => "hunter@example.com",
             "phone" => "09 61 64 48 49",

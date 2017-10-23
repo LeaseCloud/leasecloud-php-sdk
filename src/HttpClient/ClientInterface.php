@@ -1,9 +1,9 @@
 <?php
-namespace Montly\HttpClient;
+namespace LeaseCloud\HttpClient;
 
 /**
  * Interface ClientInterface
- * @package Montly\HttpClient
+ * @package LeaseCloud\HttpClient
  */
 interface ClientInterface
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Montly;
+namespace LeaseCloud;
 
-class TariffTest extends MontlyTestCase
+class TariffTest extends LeaseCloudTestCase
 {
 
     public function testGetTariff()

@@ -1,14 +1,14 @@
 <?php
-namespace Montly;
+namespace LeaseCloud;
 
 /**
- * @covers Montly\Montly
+ * @covers LeaseCloud\LeaseCloud
  */
-class MontlyTest extends MontlyTestCase
+class LeaseCloudTest extends LeaseCloudTestCase
 {
     public function testSetAndGetApiKey()
     {
-        Montly::setApiKey('Hello');
-        $this->assertEquals('Hello', Montly::getApiKey());
+        LeaseCloud::setApiKey('Hello');
+        $this->assertEquals('Hello', LeaseCloud::getApiKey());
     }
 }

@@ -1,14 +1,14 @@
 <?php
-namespace Montly;
+namespace LeaseCloud;
 
 /**
  * Class Tariff
- * @package Montly
+ * @package LeaseCloud
  */
 class Tariff extends ApiResource
 {
     /**
-     * Retreive (get) Montly tariffs
+     * Retreive (get) LeaseCloud tariffs
      *
      * @param null $id
      * @param array $params
@@ -22,7 +22,7 @@ class Tariff extends ApiResource
 
     /**
      * Return the monthly cost for an item at $price leased for $months
-     * given the $tariffs in use for the Montly account
+     * given the $tariffs in use for the LeaseCloud account
      *
      * @param double  $price   The price of the object
      * @param integer $months  The agreement length
@@ -45,7 +45,7 @@ class Tariff extends ApiResource
 
     /**
      * Return the $tariff for a contract at $months length
-     * given the tarrifs in use for the Montly account
+     * given the tarrifs in use for the LeaseCloud account
      *
      * @param $months
      * @param $tariffs

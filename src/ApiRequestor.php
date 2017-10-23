@@ -1,11 +1,11 @@
 <?php
 
-namespace Montly;
+namespace LeaseCloud;
 
 /**
  * Class ApiRequestor
  *
- * @package Montly
+ * @package LeaseCloud
  */
 class ApiRequestor
 {
@@ -23,13 +23,13 @@ class ApiRequestor
      */
     public function __construct($apiKey = null, $apiBase = null)
     {
-        $this->apiKey = $apiKey ? $apiKey : Montly::$apiKey;
+        $this->apiKey = $apiKey ? $apiKey : LeaseCloud::$apiKey;
         if (!$this->apiKey) {
             throw new Error('No API key is set');
         }
 
         if (!$apiBase) {
-            $apiBase = Montly::$apiBase;
+            $apiBase = LeaseCloud::$apiBase;
         }
         $this->apiBase = $apiBase;
     }
@@ -67,7 +67,7 @@ class ApiRequestor
 
     /**
      * Externally set the http client instead of using the
-     * default http client (Montly\HttpCluent\CurlClient)
+     * default http client (LeaseCloud\HttpCluent\CurlClient)
      *
      * @param $client
      */

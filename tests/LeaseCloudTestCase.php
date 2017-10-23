@@ -1,11 +1,11 @@
 <?php
-namespace Montly;
+namespace LeaseCloud;
 
 /**
- * Base class for Montly test cases, provides some utility methods for creating
+ * Base class for LeaseCloud test cases, provides some utility methods for creating
  * objects.
  */
-class MontlyTestCase extends \PHPUnit_Framework_TestCase
+class LeaseCloudTestCase extends \PHPUnit_Framework_TestCase
 {
     const API_KEY = 'dummyKey';
 
@@ -13,8 +13,8 @@ class MontlyTestCase extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        Montly::setApiKey(self::API_KEY);
-        Montly::$apiBase = 'https://api.montly.com';
+        LeaseCloud::setApiKey(self::API_KEY);
+        LeaseCloud::$apiBase = 'https://api.montly.com';
         $this->mock = $this->setUpMockRequest();
         $this->call = 0;
     }
@@ -30,7 +30,7 @@ class MontlyTestCase extends \PHPUnit_Framework_TestCase
     private function setUpMockRequest()
     {
         if (!$this->mock) {
-            $this->mock = $this->createMock('\Montly\HttpClient\ClientInterface');
+            $this->mock = $this->createMock('\LeaseCloud\HttpClient\ClientInterface');
             ApiRequestor::setHttpClient($this->mock);
         }
         return $this->mock;

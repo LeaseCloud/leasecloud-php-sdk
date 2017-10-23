@@ -1,9 +1,9 @@
 <?php
-namespace Montly;
+namespace LeaseCloud;
 
 /**
  * Class Webook
- * @package Montly
+ * @package Leasecloud
  */
 class Webook
 {
@@ -27,7 +27,7 @@ class Webook
     /**
      * Validate the webhook signature
      *
-     * @param string $signature The string passed in header Montly-Signature
+     * @param string $signature The string passed in header LeaseCloud-Signature
      * @param string $payload   The raw payload
      *
      * @return bool True if the signature is valid, otherwise false

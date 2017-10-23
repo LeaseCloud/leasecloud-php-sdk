@@ -9,7 +9,7 @@
 
 
     <testsuites>
-        <testsuite name="Montly PHP SDK Test Suite">
+        <testsuite name="LeaseCloud PHP SDK Test Suite">
             <directory suffix="Test.php">tests</directory>
         </testsuite>
     </testsuites>
