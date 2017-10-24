@@ -1,6 +1,6 @@
 # LeaseCloud PHP SDK
 
-[![CircleCI](https://circleci.com/gh/LeaseCloud/leasecloud-php-sdk/tree/master.svg?style=svg)](https://circleci.com/gh/LeaseCloud/leasecloud-php-sdk/tree/master) [![Latest Stable Version](https://poser.pugx.org/leasecloud/leasecloud-php-sdk/version)](https://packagist.org/packages/leasecloud/leasecloud-php-sdk) [![License](https://poser.pugx.org/leasecloud/leasecloud-php-sdk/license.svg)](https://packagist.org/leasecloud/leasecloud-php-sdk)
+[![CircleCI](https://circleci.com/gh/LeaseCloud/leasecloud-php-sdk/tree/master.svg?style=shield)](https://circleci.com/gh/LeaseCloud/leasecloud-php-sdk/tree/master) [![Latest Stable Version](https://poser.pugx.org/leasecloud/leasecloud-php-sdk/version)](https://packagist.org/packages/leasecloud/leasecloud-php-sdk) [![License](https://poser.pugx.org/leasecloud/leasecloud-php-sdk/license.svg)](https://packagist.org/leasecloud/leasecloud-php-sdk)
 
 
 Sign up for a LeaseCloud account at https://www.leasecloud.se
