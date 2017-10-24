@@ -45,11 +45,15 @@ Please see [http://leasecloud.io](http://leasecloud.io) for up-to-date documenta
 require_once('vendor/autoload.php');
 
 LeaseCloud\LeaseCloud::setApiKey(API_KEY);
-$tariffs = LeaseCloud\Tariff::retrieve();
+$tariffs = LeaseCloud\Config::retrieve();
 print_r($tariffs);
 
 Output:
 stdClass Object (
+    [financeCompany] => stdClass Object (
+        [name] => "Montly Leasing",
+        [logo] => "https://example.com/logo.svg"
+    ),
     [tariffs] => Array
         (
             [0] => stdClass Object
