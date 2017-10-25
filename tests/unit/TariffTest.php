@@ -35,8 +35,8 @@ class TariffTest extends LeaseCloudTestCase
         ]));
 
 
-        static::assertEquals(358, Tariff::monthlyCost(7999, 24, $tariffs));
-        static::assertEquals(243, Tariff::monthlyCost(7999, 36, $tariffs));
-        static::assertNull(Tariff::monthlyCost(7999, 10, $tariffs));
+        static::assertEquals(358, Tariff::monthlyCost(7999, 24, $tariffs->tariffs));
+        static::assertEquals(243, Tariff::monthlyCost(7999, 36, $tariffs->tariffs));
+        static::assertNull(Tariff::monthlyCost(7999, 10, $tariffs->tariffs));
     }
 }

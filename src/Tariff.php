@@ -26,7 +26,7 @@ class Tariff extends ApiResource
      *
      * @param double  $price   The price of the object
      * @param integer $months  The agreement length
-     * @param object  $tariffs The tariffs object, as returned by Tariff:retrieve
+     * @param array  $tariffs The tariffs array, from the TariffObject->tariffs as returned by Tariff:retrieve
      *
      * @return integer|null The monthly cost for the end user
      */
@@ -54,7 +54,7 @@ class Tariff extends ApiResource
      */
     public static function tariff($months, $tariffs)
     {
-        foreach ($tariffs->tariffs as $tariff) {
+        foreach ($tariffs as $tariff) {
             if ($months == $tariff->months) {
                 return (double)($tariff->tariff);
             }

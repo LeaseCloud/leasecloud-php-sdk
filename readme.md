@@ -80,7 +80,7 @@ To determine the monthly price for a specific item in your ecommerce shop, use t
 
 ```php
 $tariffs = ... // Read from your cache
-$monthlyPrice = Tariff::monthlyCost(7999, 36, $tariffs);
+$monthlyPrice = Tariff::monthlyCost(7999, 36, $tariffs->tariffs);
 var_dump($monthlyPrice);
 
 Output:
@@ -97,11 +97,11 @@ require_once('vendor/autoload.php');
 */
 
 $tariffs = ... // Read from your cache
-$tariff = LeaseCloud\Tariff::tariff($months, $tariffs);
+$tariff = LeaseCloud\Tariff::tariff($months, $tariffs->tariffs);
 $totalAmount = 9000; // 9000 SEK
 $vat = 0.25;
 $months = 36;
-$monthlyAmount = LeaseCloud\Tariff::monthlyCost($totalAmount, $months, $tariffs);
+$monthlyAmount = LeaseCloud\Tariff::monthlyCost($totalAmount, $months, $tariffs->tariffs);
 
 $order = [
            "orderId"        => $orderId,      // Unique id from your ecommerce system
