@@ -45,8 +45,8 @@ Please see [http://leasecloud.io](http://leasecloud.io) for up-to-date documenta
 require_once('vendor/autoload.php');
 
 LeaseCloud\LeaseCloud::setApiKey(API_KEY);
-$tariffs = LeaseCloud\Config::retrieve();
-print_r($tariffs);
+$config = LeaseCloud\Config::retrieve();
+print_r($config);
 
 Output:
 stdClass Object (
@@ -79,8 +79,8 @@ You are responsible for caching the tariffs object in your environment. Re-read 
 To determine the monthly price for a specific item in your ecommerce shop, use the helper function:
 
 ```php
-$tariffs = ... // Read from your cache
-$monthlyPrice = Tariff::monthlyCost(7999, 36, $tariffs->tariffs);
+$config = ... // Read from your cache
+$monthlyPrice = Tariff::monthlyCost(7999, 36, $config->tariffs);
 var_dump($monthlyPrice);
 
 Output:
@@ -96,12 +96,12 @@ require_once('vendor/autoload.php');
   See http://leasecloud.io/#create-a-new-order for complete set of fields
 */
 
-$tariffs = ... // Read from your cache
-$tariff = LeaseCloud\Tariff::tariff($months, $tariffs->tariffs);
+$config = ... // Read from your cache
+$tariff = LeaseCloud\Tariff::tariff($months, $config->tariffs);
 $totalAmount = 9000; // 9000 SEK
 $vat = 0.25;
 $months = 36;
-$monthlyAmount = LeaseCloud\Tariff::monthlyCost($totalAmount, $months, $tariffs->tariffs);
+$monthlyAmount = LeaseCloud\Tariff::monthlyCost($totalAmount, $months, $config->tariffs);
 
 $order = [
            "orderId"        => $orderId,      // Unique id from your ecommerce system
