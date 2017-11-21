@@ -12,7 +12,7 @@ class WebookTest extends LeaseCloudTestCase
         $secret = 'SECRET';
         $payload = json_encode(['someValue' => 'theValue']);
 
-        $hmacShaPayload = hash_hmac('sha256', $timestamp.$payload, $secret);
+        $hmacShaPayload = hash_hmac('sha256', $timestamp . '.' . $payload, $secret);
         $signature = "t=$timestamp,v1=$hmacShaPayload,v1=???";
 
         Webook::setSecret($secret);
