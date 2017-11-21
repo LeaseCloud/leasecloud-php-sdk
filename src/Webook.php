@@ -50,7 +50,7 @@ class Webook
             return false;
         }
 
-        $wanted = hash_hmac('sha256', $t . $payload, self::$secret);
+        $wanted = hash_hmac('sha256', $t . '.' . $payload, self::$secret);
 
         // Find v1 hashes
         foreach ($parts as $part) {
