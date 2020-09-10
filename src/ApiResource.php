@@ -53,7 +53,7 @@ abstract class ApiResource
     public static function classUrl()
     {
         $base = static::className();
-        return "/v1/${base}s";
+        return "/v2/${base}s";
     }
 
     /**
